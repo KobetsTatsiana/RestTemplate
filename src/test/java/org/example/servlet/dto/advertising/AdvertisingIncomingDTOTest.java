@@ -11,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class AdvertisingIncomingDTOTest {
 
     @Test
-    public void testGettersAndSetters() {
+    void testGettersAndSetters() {
 
         AdvertisingIncomingDTO dto = new AdvertisingIncomingDTO();
 

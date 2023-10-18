@@ -88,7 +88,6 @@ public class UserIdServlet extends HttpServlet {
             handleException(response, e, "Failed to process DELETE request");
         }
     }
-
     private String extractIdFromRequest(HttpServletRequest request) {
         String pathInfo = request.getPathInfo();
         if (pathInfo == null || pathInfo.isEmpty()) {
@@ -96,53 +95,54 @@ public class UserIdServlet extends HttpServlet {
         }
         String[] pathParts = pathInfo.split("/");
         return pathParts.length > 1 ? String.valueOf(Long.valueOf(pathParts[pathParts.length - 1])) : null;
-    }
 
+    }
     private void processGetRequest(String id, HttpServletResponse response) throws IOException, SQLException {
-        setResponseDefaults(response);
+        setResponseDefaults( response );
         Long longId;
-        try {
-            longId = Long.valueOf(id);
-        } catch (IllegalArgumentException e) {
-            sendBadRequest(response, "Invalid ID format");
+        try{
+            longId = Long.valueOf( id );
+        } catch(IllegalArgumentException e){
+            sendBadRequest( response, "Invalid ID format" );
             return;
         }
 
-        Optional<UserEntity> userEntityOptional = service.findById(longId);
+        Optional<UserEntity> userEntityOptional = service.findById( longId );
         if (!userEntityOptional.isPresent()) {
-            sendNotFound(response);
+            sendNotFound( response );
             return;
         }
 
         UserEntity userEntity = userEntityOptional.get();
-        String jsonString = mapper.writeValueAsString(userEntity);
-        response.getWriter().write(jsonString);
-    }
+        String jsonString = mapper.writeValueAsString( userEntity );
+        response.getWriter().write( jsonString );
 
+
+    }
     private void processPutRequest(String id, HttpServletRequest request, HttpServletResponse response) throws IOException {
         setResponseDefaults(response);
         Long longId;
-        try {
-            longId = Long.valueOf(id);
-        } catch (IllegalArgumentException e) {
-            sendBadRequest(response, "Invalid ID format");
+        try{
+            longId = Long.valueOf( id );
+        } catch(IllegalArgumentException e){
+            sendBadRequest( response, "Invalid ID format" );
             return;
         }
 
-        StringBuilder sb = getStringFromRequest(request);
+        StringBuilder sb = getStringFromRequest( request );
         UserEntity userEntity;
         try {
-            userEntity = mapper.readValue(sb.toString(), UserEntity.class);
+            userEntity = mapper.readValue( sb.toString(), UserEntity.class );
         } catch (JsonProcessingException e) {
             sendBadRequest(response, "Invalid JSON format");
             return;
         }
 
-        userEntity.setId(longId);
+        userEntity.setId( longId );
 
-        try {
-            service.save(userEntity);
-            response.getWriter().write("User updated successfully");
+        try{
+            service.save( userEntity );
+            response.getWriter().write( "User updated successfully" );
         } catch (SQLException e) {
             LOGGER.error("Failed to save UserEntity", e);
             response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
@@ -153,10 +153,9 @@ public class UserIdServlet extends HttpServlet {
         response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
         response.getWriter().write(message);
     }
-
     private void sendNotFound(HttpServletResponse response) throws IOException {
         response.setStatus(HttpServletResponse.SC_NOT_FOUND);
-        response.getWriter().write("Author not found");
+        response.getWriter().write("User not found");
     }
 
     private void setResponseDefaults(HttpServletResponse response) {
@@ -164,7 +163,6 @@ public class UserIdServlet extends HttpServlet {
         response.setContentType(APPLICATION_JSON);
         response.setCharacterEncoding(UTF_8);
     }
-
     private StringBuilder getStringFromRequest(HttpServletRequest request) throws IOException {
         StringBuilder sb = new StringBuilder();
         String line;
@@ -177,11 +175,11 @@ public class UserIdServlet extends HttpServlet {
     }
 
     private void handleException(HttpServletResponse response, Exception e, String logMessage) throws IOException {
-        LOGGER.error(logMessage, e);
-        response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-        response.setContentType(APPLICATION_JSON);
-        response.setCharacterEncoding(UTF_8);
-        response.getWriter().write("An internal server error occurred.");
+        LOGGER.error( logMessage, e );
+        response.setStatus( HttpServletResponse.SC_INTERNAL_SERVER_ERROR );
+        response.setContentType( APPLICATION_JSON );
+        response.setCharacterEncoding( UTF_8 );
+        response.getWriter().write( "An internal server error occurred." );
     }
 
     protected void setService(Service<UserEntity, Long> service) {

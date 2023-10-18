@@ -28,7 +28,7 @@ class HikariCPDataSourceTest {
     }
 
     @Test
-    void testInitializeConfig_Success() throws Exception {
+     void testInitializeConfig_Success() throws Exception {
         try (InputStream is = getClass().getClassLoader().getResourceAsStream("db.properties")) {
             assertNotNull(is, "Ensure db.properties is present for this test");
         }

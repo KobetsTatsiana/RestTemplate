@@ -18,6 +18,7 @@ class AdvertisingTest {
 
     @Test
     void testDefaultIdNotNull() {
+
         assertNotNull(advertising.getId());
     }
 

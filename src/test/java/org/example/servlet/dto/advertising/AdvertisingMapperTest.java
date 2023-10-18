@@ -11,10 +11,10 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class AdvertisingMapperTest {
+class AdvertisingMapperTest {
 
     @Test
-    public void mapListToDto() {
+    void mapListToDto() {
         AdvertisingMapper mapper = AdvertisingMapper.INSTANCE;
 
         List<Advertising> advertisingList = new ArrayList<>();
@@ -30,7 +30,7 @@ public class AdvertisingMapperTest {
     }
 
     @Test
-    public void mapAdvertisingIncomingDTO() {
+    void mapAdvertisingIncomingDTO() {
         AdvertisingMapper mapper = AdvertisingMapper.INSTANCE;
 
         AdvertisingIncomingDTO incomingDTO = new AdvertisingIncomingDTO();
