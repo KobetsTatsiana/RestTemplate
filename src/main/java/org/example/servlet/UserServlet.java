@@ -8,13 +8,10 @@ import jakarta.servlet.http.HttpServletResponse;
 import org.example.db.ConnectionManager;
 import org.example.db.HikariCPDataSource;
 import org.example.model.UserEntity;
-import org.example.repository.Repository;
 import org.example.repository.UserRepository;
 import org.example.repository.impl.UserRepositoryImpl;
 import org.example.service.Service;
 import org.example.service.impl.UserServiceImpl;
-import org.example.servlet.dto.user.EntityAllOutGoingDTO;
-import org.example.servlet.dto.user.mapper.UserDtoMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -30,7 +27,6 @@ public class UserServlet extends HttpServlet {
     private ObjectMapper mapper = new ObjectMapper();
     private final ConnectionManager connectionManager;
     private final UserRepository<UserEntity, Long> repository;
-
     private transient Service<UserEntity, Long> service;
 
     public UserServlet() {

@@ -5,10 +5,8 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.example.db.ConnectionManager;
 import org.example.model.Advertising;
-
 import org.example.repository.Repository;
 import org.example.repository.impl.AdvertisingRepositoryImpl;
-
 import org.example.service.Service;
 import org.example.service.impl.AdvertisingServiceImpl;
 
@@ -25,7 +23,6 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.Collections;
 import java.util.Optional;
-import java.util.UUID;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
@@ -41,12 +38,12 @@ class AdvertisingServletTest {
     @BeforeEach
     void setUp() throws SQLException {
         mockedService = Mockito.mock(AdvertisingServiceImpl.class);
-        mockedRepository = Mockito.mock( AdvertisingRepositoryImpl.class);
+        mockedRepository = Mockito.mock(AdvertisingRepositoryImpl.class);
         mockedConnectionManager = Mockito.mock(ConnectionManager.class);
         mockedConnection = Mockito.mock(Connection.class);
 
         when(mockedService.getRepository()).thenReturn(mockedRepository);
-        when(mockedRepository.save(any())).thenReturn( Optional.empty());
+        when(mockedRepository.save(any())).thenReturn(Optional.empty());
         when(mockedRepository.findAll()).thenReturn(Collections.emptyList());
         when(mockedConnectionManager.getConnection()).thenReturn(mockedConnection);
 

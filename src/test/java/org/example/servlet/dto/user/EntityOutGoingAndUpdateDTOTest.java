@@ -1,4 +1,5 @@
 package org.example.servlet.dto.user;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

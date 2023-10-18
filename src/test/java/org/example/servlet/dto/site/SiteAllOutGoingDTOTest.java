@@ -20,25 +20,22 @@ public class SiteAllOutGoingDTOTest {
 
     @Test
     public void testGetUserSiteList_default() {
-        // When
+
         List<UserSite> result = dto.getUserSiteList();
 
-        // Then
         assertTrue(result.isEmpty());
     }
 
     @Test
     public void testGetSetUserSiteList() {
-        // Given
+
         List<UserSite> userSites = new ArrayList<>();
         userSites.add(new UserSite());
         userSites.add(new UserSite());
 
-        // When
         dto.setUserSiteList(userSites);
         List<UserSite> result = dto.getUserSiteList();
 
-        // Then
         assertEquals(userSites, result);
     }
 }

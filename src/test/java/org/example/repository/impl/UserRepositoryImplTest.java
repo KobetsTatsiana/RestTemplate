@@ -21,11 +21,11 @@ import java.util.List;
 class UserRepositoryImplTest {
 
     @Container
-    public static PostgreSQLContainer<?> postgreSQLContainer = new PostgreSQLContainer<>( "postgres:13.1" )
-            .withDatabaseName( "test-db" )
-            .withUsername( "test" )
-            .withPassword( "test" )
-            .withInitScript( "mydb.sql" );
+    public static PostgreSQLContainer<?> postgreSQLContainer = new PostgreSQLContainer<>("postgres:13.1")
+            .withDatabaseName("test-db")
+            .withUsername("test")
+            .withPassword("test")
+            .withInitScript("mydb.sql");
 
     private UserRepositoryImpl repository;
 
@@ -34,10 +34,10 @@ class UserRepositoryImplTest {
         ConnectionManager testConnectionManager = new ConnectionManager() {
             @Override
             public Connection getConnection() throws SQLException {
-                return postgreSQLContainer.createConnection( "" );
+                return postgreSQLContainer.createConnection("");
             }
         };
-        repository = new UserRepositoryImpl( testConnectionManager );
+        repository = new UserRepositoryImpl(testConnectionManager);
     }
 
     @AfterEach
@@ -47,22 +47,22 @@ class UserRepositoryImplTest {
 
     @Test
     void testFindById() throws SQLException {
-        UserEntity entity = new UserEntity(  );
-        entity.setName( "Name" );
+        UserEntity entity = new UserEntity();
+        entity.setName("Name");
         entity.setSurname("Surname");
         entity.setAddress("Address");
         UserSite userSite = new UserSite();
-        userSite.setNameSite( "NameSite" );
-        entity.getUserSiteList().add( userSite );
-        repository.save( entity );
+        userSite.setNameSite("NameSite");
+        entity.getUserSiteList().add(userSite);
+        repository.save(entity);
 
-        UserEntity foundEntity = repository.findById( entity.getId() ).orElse( null );
-        Assertions.assertNotNull( foundEntity );
-        Assertions.assertEquals( entity.getId(), foundEntity.getId() );
-        Assertions.assertEquals( entity.getName(), foundEntity.getName() );
-        Assertions.assertEquals( entity.getSurname(), foundEntity.getSurname() );
-        Assertions.assertEquals( entity.getAddress(), foundEntity.getAddress() );
-        Assertions.assertEquals( 1, foundEntity.getUserSiteList().size() );
+        UserEntity foundEntity = repository.findById(entity.getId()).orElse(null);
+        Assertions.assertNotNull(foundEntity);
+        Assertions.assertEquals(entity.getId(), foundEntity.getId());
+        Assertions.assertEquals(entity.getName(), foundEntity.getName());
+        Assertions.assertEquals(entity.getSurname(), foundEntity.getSurname());
+        Assertions.assertEquals(entity.getAddress(), foundEntity.getAddress());
+        Assertions.assertEquals(1, foundEntity.getUserSiteList().size());
     }
 
     @Test
@@ -81,112 +81,113 @@ class UserRepositoryImplTest {
 
     @Test
     void testDeleteById() throws SQLException {
-        UserEntity entity = new UserEntity(  );
-        entity.setName( "Name" );
-        entity.setSurname( "Surname" );
-        entity.setAddress( "Address" );
+        UserEntity entity = new UserEntity();
+        entity.setName("Name");
+        entity.setSurname("Surname");
+        entity.setAddress("Address");
         UserSite userSite = new UserSite();
-        userSite.setNameSite( "Name Site" );
-        entity.getUserSiteList().add( userSite );
-        repository.save( entity );
+        userSite.setNameSite("Name Site");
+        entity.getUserSiteList().add(userSite);
+        repository.save(entity);
 
-        boolean isDeleted = repository.deleteById( entity.getId() );
-        Assertions.assertTrue( isDeleted );
+        boolean isDeleted = repository.deleteById(entity.getId());
+        Assertions.assertTrue(isDeleted);
 
-        UserEntity deletedEntity = repository.findById( entity.getId() ).orElse( null );
-        Assertions.assertNull( deletedEntity );
+        UserEntity deletedEntity = repository.findById(entity.getId()).orElse(null);
+        Assertions.assertNull(deletedEntity);
     }
 
     @Test
     void testSave() throws SQLException {
-        UserEntity entity = new UserEntity(  );
-        entity.setName( "Name" );
-        entity.setSurname( "Surname" );
-        entity.setAddress( "Address" );
+        UserEntity entity = new UserEntity();
+        entity.setName("Name");
+        entity.setSurname("Surname");
+        entity.setAddress("Address");
         UserSite userSite = new UserSite();
-        userSite.setNameSite( "Name Site" );
-        entity.getUserSiteList().add( userSite );
-        UserEntity savedEntity = repository.save( entity ).orElse( null );
-        Assertions.assertNotNull( savedEntity );
-        Assertions.assertEquals( entity.getName(), savedEntity.getName() );
-        Assertions.assertEquals( entity.getSurname(), savedEntity.getSurname() );
-        Assertions.assertEquals( entity.getAddress(), savedEntity.getAddress() );
-        Assertions.assertEquals( 1, savedEntity.getUserSiteList().size() );
+        userSite.setNameSite("Name Site");
+        entity.getUserSiteList().add(userSite);
+        UserEntity savedEntity = repository.save(entity).orElse(null);
+        Assertions.assertNotNull(savedEntity);
+        Assertions.assertEquals(entity.getName(), savedEntity.getName());
+        Assertions.assertEquals(entity.getSurname(), savedEntity.getSurname());
+        Assertions.assertEquals(entity.getAddress(), savedEntity.getAddress());
+        Assertions.assertEquals(1, savedEntity.getUserSiteList().size());
 
         long idSavedEntity = entity.getId();
-        savedEntity = repository.findById( idSavedEntity ).orElse( null );
+        savedEntity = repository.findById(idSavedEntity).orElse(null);
         assert savedEntity != null;
-        Assertions.assertEquals( entity.getName(), savedEntity.getName() );
-        Assertions.assertEquals( entity.getSurname(), savedEntity.getSurname() );
-        Assertions.assertEquals( entity.getAddress(), savedEntity.getAddress() );
-        Assertions.assertEquals( entity.getId(), savedEntity.getId() );
+        Assertions.assertEquals(entity.getName(), savedEntity.getName());
+        Assertions.assertEquals(entity.getSurname(), savedEntity.getSurname());
+        Assertions.assertEquals(entity.getAddress(), savedEntity.getAddress());
+        Assertions.assertEquals(entity.getId(), savedEntity.getId());
     }
 
     @Test
     void testUpdate() throws SQLException {
-        UserEntity entity = new UserEntity(  );
-        entity.setName( "Name" );
-        entity.setSurname( "Surname" );
-        entity.setAddress( "Address" );
+        UserEntity entity = new UserEntity();
+        entity.setName("Name");
+        entity.setSurname("Surname");
+        entity.setAddress("Address");
         UserSite userSite = new UserSite();
-        userSite.setNameSite( "Name Site" );
-        entity.getUserSiteList().add( userSite );
-        UserEntity savedEntity = repository.save( entity ).orElse( null );
-        Assertions.assertNotNull( savedEntity );
-        Assertions.assertEquals( entity.getName(), savedEntity.getName() );
-        Assertions.assertEquals( entity.getSurname(), savedEntity.getSurname() );
-        Assertions.assertEquals( entity.getAddress(), savedEntity.getAddress() );
-        Assertions.assertEquals( 1, savedEntity.getUserSiteList().size() );
+        userSite.setNameSite("Name Site");
+        entity.getUserSiteList().add(userSite);
+        UserEntity savedEntity = repository.save(entity).orElse(null);
+        Assertions.assertNotNull(savedEntity);
+        Assertions.assertEquals(entity.getName(), savedEntity.getName());
+        Assertions.assertEquals(entity.getSurname(), savedEntity.getSurname());
+        Assertions.assertEquals(entity.getAddress(), savedEntity.getAddress());
+        Assertions.assertEquals(1, savedEntity.getUserSiteList().size());
 
         long idSavedEntity = entity.getId();
-        savedEntity = repository.findById( idSavedEntity ).orElse( null );
+        savedEntity = repository.findById(idSavedEntity).orElse(null);
         assert savedEntity != null;
-        Assertions.assertEquals( entity.getName(), savedEntity.getName() );
-        Assertions.assertEquals( entity.getSurname(), savedEntity.getSurname() );
-        Assertions.assertEquals( entity.getAddress(), savedEntity.getAddress() );
-        Assertions.assertEquals( entity.getId(), savedEntity.getId() );
+        Assertions.assertEquals(entity.getName(), savedEntity.getName());
+        Assertions.assertEquals(entity.getSurname(), savedEntity.getSurname());
+        Assertions.assertEquals(entity.getAddress(), savedEntity.getAddress());
+        Assertions.assertEquals(entity.getId(), savedEntity.getId());
 
         String updatedName = "Updated Name";
         String updatedSurname = "Updated Surname";
         String updatedAddress = "Updated Address";
-        entity.setName( updatedName );
-        entity.setSurname( updatedSurname );
-        entity.setAddress( updatedAddress );
-        savedEntity = repository.save( entity ).orElse( null );
-        Assertions.assertNotNull( savedEntity );
-        Assertions.assertEquals( entity.getName(), savedEntity.getName() );
-        Assertions.assertEquals( entity.getSurname(), savedEntity.getSurname() );
-        Assertions.assertEquals( entity.getAddress(), savedEntity.getAddress() );
-        Assertions.assertEquals( 1, savedEntity.getUserSiteList().size() );
+        entity.setName(updatedName);
+        entity.setSurname(updatedSurname);
+        entity.setAddress(updatedAddress);
+        savedEntity = repository.save(entity).orElse(null);
+        Assertions.assertNotNull(savedEntity);
+        Assertions.assertEquals(entity.getName(), savedEntity.getName());
+        Assertions.assertEquals(entity.getSurname(), savedEntity.getSurname());
+        Assertions.assertEquals(entity.getAddress(), savedEntity.getAddress());
+        Assertions.assertEquals(1, savedEntity.getUserSiteList().size());
 
 
         String updatedNameSite = "Updated NameSite";
-        userSite.setNameSite( updatedNameSite );
+        userSite.setNameSite(updatedNameSite);
 
-        savedEntity = repository.save( entity ).orElse( null );
-        Assertions.assertNotNull( savedEntity );
-        Assertions.assertEquals( 1, savedEntity.getUserSiteList().size() );
-        UserSite savedUserSite = savedEntity.getUserSiteList().get( 0 );
-        Assertions.assertNotNull( savedUserSite );
-        Assertions.assertEquals( savedUserSite.getNameSite(), userSite.getNameSite() );
+        savedEntity = repository.save(entity).orElse(null);
+        Assertions.assertNotNull(savedEntity);
+        Assertions.assertEquals(1, savedEntity.getUserSiteList().size());
+        UserSite savedUserSite = savedEntity.getUserSiteList().get(0);
+        Assertions.assertNotNull(savedUserSite);
+        Assertions.assertEquals(savedUserSite.getNameSite(), userSite.getNameSite());
     }
+
     @Test
     void findSitesAll() throws SQLException {
-        UserEntity entity = new UserEntity(  );
-        entity.setName( "Test Name" );
-        entity.setSurname( "Test Surname" );
-        entity.setAddress( "Test Address" );
+        UserEntity entity = new UserEntity();
+        entity.setName("Test Name");
+        entity.setSurname("Test Surname");
+        entity.setAddress("Test Address");
         UserSite userSite = new UserSite();
-        userSite.setNameSite( "NameSite" );
-        entity.getUserSiteList().add( userSite );
+        userSite.setNameSite("NameSite");
+        entity.getUserSiteList().add(userSite);
         UserSite newUserSite = new UserSite();
-        newUserSite.setNameSite( "New NameSite" );
-        entity.getUserSiteList().add( newUserSite );
-        repository.save( entity );
+        newUserSite.setNameSite("New NameSite");
+        entity.getUserSiteList().add(newUserSite);
+        repository.save(entity);
 
         List<UserSite> userSiteList = repository.findSitesAll();
 
-        Assertions.assertEquals( 2,userSiteList.size() );
+        Assertions.assertEquals(2, userSiteList.size());
 
     }
 
@@ -201,10 +202,10 @@ class UserRepositoryImplTest {
         repository.save(user2);
 
         List<UserEntity> entities = repository.findAll();
-        Assertions.assertEquals( 2, entities.size() );
+        Assertions.assertEquals(2, entities.size());
 
         repository.clearAll();
 
-        Assertions.assertEquals(0, repository.findAll().size() );
+        Assertions.assertEquals(0, repository.findAll().size());
     }
 }

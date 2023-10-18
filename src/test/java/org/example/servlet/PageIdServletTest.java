@@ -4,16 +4,11 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.example.db.ConnectionManager;
 import org.example.model.Advertising;
-
 import org.example.model.SitePage;
-
 import org.example.repository.Repository;
 import org.example.repository.impl.AdvertisingRepositoryImpl;
-
 import org.example.repository.impl.SitePageRepositoryImpl;
-
 import org.example.service.Service;
-
 import org.example.service.impl.SitePageServiceImpl;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -29,7 +24,6 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.Collections;
 import java.util.Optional;
-import java.util.UUID;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;

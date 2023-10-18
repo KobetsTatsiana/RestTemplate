@@ -6,7 +6,6 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 class EntityIncomingDTOTest {
-
     private EntityIncomingDTO entityIncomingDTO;
 
     @BeforeEach
@@ -40,4 +39,5 @@ class EntityIncomingDTOTest {
         String setSurname = "Set Surname";
         entityIncomingDTO.setSurname(setSurname);
         assertSame(setSurname, entityIncomingDTO.getSurname());
-    }}
+    }
+}

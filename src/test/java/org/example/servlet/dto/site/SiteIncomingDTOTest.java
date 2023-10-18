@@ -43,4 +43,5 @@ public class SiteIncomingDTOTest {
         list.add(new SitePage());
         siteIncomingDTO.setSitePageList(list);
         assertEquals(list, siteIncomingDTO.getSitePageList());
-    }}
+    }
+}

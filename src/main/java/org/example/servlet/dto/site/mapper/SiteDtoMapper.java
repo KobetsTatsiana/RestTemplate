@@ -1,14 +1,11 @@
 package org.example.servlet.dto.site.mapper;
 
-import org.example.model.SitePage;
 import org.example.model.UserSite;
 import org.example.servlet.dto.site.SiteAllOutGoingDTO;
-import org.example.servlet.dto.site.SiteDto;
-import org.example.servlet.dto.site.SiteIncomingDTO;
+
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Mapper
@@ -18,7 +15,7 @@ public interface SiteDtoMapper {
 
     default SiteAllOutGoingDTO mapListToDto(List<UserSite> userSiteList) {
         SiteAllOutGoingDTO siteAllOutGoingDTO = new SiteAllOutGoingDTO();
-        siteAllOutGoingDTO.setUserSiteList( userSiteList );
+        siteAllOutGoingDTO.setUserSiteList(userSiteList);
         return siteAllOutGoingDTO;
     }
 }

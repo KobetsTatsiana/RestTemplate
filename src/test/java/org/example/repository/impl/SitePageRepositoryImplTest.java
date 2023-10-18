@@ -1,4 +1,5 @@
 package org.example.repository.impl;
+
 import org.example.db.ConnectionManager;
 import org.example.model.Advertising;
 import org.example.model.SitePage;
@@ -107,15 +108,7 @@ public class SitePageRepositoryImplTest {
         advertising.setId(3L);
         advertising.setInfoText("Test InfoText");
         entity.getAdvertisingList().add(advertising);
-        SitePage savedEntity = repository.save(entity).get();//
-        /*  SitePage entity = new SitePage();
-        entity.setId(3L);
-        entity.setNamePage("Test NamePage");
-        Advertising advertising = new Advertising();
-        advertising.setId(3L);
-        advertising.setInfoText("Test InfoText");
-        entity.getAdvertisingList().add(advertising);
-        SitePage savedEntity = repository.save(entity).get();//*/
+        SitePage savedEntity = repository.save(entity).get();
         Assertions.assertNotNull(savedEntity);
         Assertions.assertEquals(entity.getNamePage(), savedEntity.getNamePage());
         Assertions.assertEquals(1, savedEntity.getAdvertisingList().size());

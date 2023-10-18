@@ -1,6 +1,6 @@
 package org.example.servlet.dto.page;
+
 import org.example.model.Advertising;
-import org.example.servlet.dto.page.PageIncomingDTO;
 import org.junit.Before;
 import org.junit.Test;
 

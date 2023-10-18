@@ -103,22 +103,18 @@ public class AdvertisingRepositoryImpl implements Repository<Advertising, Long> 
         return advertisingList;
     }
 
-    private static final String SAVE_TAG_SQL = "INSERT INTO Advertising (id, infotext) VALUES (?, ?) ON CONFLICT (id) DO UPDATE SET infotext = EXCLUDED.infotext";
-    private static final String SAVE_BOOK_SQL = "INSERT INTO sitepage (id, namepage) VALUES (?, ?) ON CONFLICT (id) DO UPDATE SET namepage = EXCLUDED.namepage";
-    private static final String INSERT_BOOK_TAG_SQL = "INSERT INTO sitepage_advertising (sitepage_id, advertising_id) VALUES (?, ?) ON CONFLICT DO NOTHING";
-
     @Override
     public Optional<Advertising> save(Advertising advertising) throws SQLException {
         try (Connection connection = connectionManager.getConnection()) {
             connection.setAutoCommit(false);
-            try (PreparedStatement advertisingStatement = connection.prepareStatement(SAVE_TAG_SQL)) {
+            try (PreparedStatement advertisingStatement = connection.prepareStatement("INSERT INTO Advertising (id, infotext) VALUES (?, ?) ON CONFLICT (id) DO UPDATE SET infotext = EXCLUDED.infotext")) {
                 advertisingStatement.setObject(1, advertising.getId());
                 advertisingStatement.setString(2, advertising.getInfoText());
                 advertisingStatement.executeUpdate();
             }
             if (advertising.getSitePageList() != null && !advertising.getSitePageList().isEmpty()) {
-                try (PreparedStatement pageStatement = connection.prepareStatement(SAVE_BOOK_SQL);
-                     PreparedStatement pageadvertisingStatement = connection.prepareStatement(INSERT_BOOK_TAG_SQL)) {
+                try (PreparedStatement pageStatement = connection.prepareStatement("INSERT INTO sitepage (id, namepage) VALUES (?, ?) ON CONFLICT (id) DO UPDATE SET namepage = EXCLUDED.namepage");
+                     PreparedStatement pageadvertisingStatement = connection.prepareStatement("INSERT INTO sitepage_advertising (sitepage_id, advertising_id) VALUES (?, ?) ON CONFLICT DO NOTHING")) {
                     for (SitePage sitePage : advertising.getSitePageList()) {
                         pageStatement.setObject(1, sitePage.getId());
                         pageStatement.setString(2, sitePage.getNamePage());

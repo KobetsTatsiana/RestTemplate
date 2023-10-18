@@ -2,9 +2,7 @@ package org.example.service.impl;
 
 import org.example.model.UserEntity;
 import org.example.model.UserSite;
-import org.example.repository.Repository;
 import org.example.repository.UserRepository;
-import org.example.service.Service;
 import org.example.service.UserService;
 
 import java.sql.SQLException;

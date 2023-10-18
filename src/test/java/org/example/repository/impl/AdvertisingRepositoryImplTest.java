@@ -78,7 +78,6 @@ class AdvertisingRepositoryImplTest {
         assertEquals(2, entities.size());
     }
 
-
     @Test
     void testDeleteById() throws SQLException {
         Advertising entity = new Advertising();
@@ -96,7 +95,6 @@ class AdvertisingRepositoryImplTest {
         Advertising deletedEntity = repository.findById(entity.getId()).orElse(null);
         assertNull(deletedEntity);
     }
-
 
     @Test
     void testSave() throws SQLException {
@@ -122,17 +120,18 @@ class AdvertisingRepositoryImplTest {
     void clearAll() throws SQLException {
         Advertising advertising1 = new Advertising();
         advertising1.setId(1L);
-        repository.save( advertising1 );
+        repository.save(advertising1);
 
         Advertising advertising2 = new Advertising();
         advertising2.setId(2L);
-        repository.save( advertising2 );
+        repository.save(advertising2);
 
 
         List<Advertising> entities = repository.findAll();
-        assertEquals( 2, entities.size() );
+        assertEquals(2, entities.size());
 
         repository.clearAll();
 
-        assertEquals( 0, repository.findAll().size() );
-    }}
+        assertEquals(0, repository.findAll().size());
+    }
+}

@@ -13,7 +13,7 @@ import java.util.List;
 
 @Mapper
 public interface AdvertisingDtoMapper {
-    AdvertisingDtoMapper INSTANCE = Mappers.getMapper( AdvertisingDtoMapper.class );
+    AdvertisingDtoMapper INSTANCE = Mappers.getMapper(AdvertisingDtoMapper.class);
 
     AdvertisingDto map(Advertising advertising);
 
@@ -21,18 +21,18 @@ public interface AdvertisingDtoMapper {
 
     default AdvertisingAllOutGoingDTO mapListToDto(List<Advertising> advertisingList) {
         AdvertisingAllOutGoingDTO advertisingAllOutGoingDTO = new AdvertisingAllOutGoingDTO();
-        advertisingAllOutGoingDTO.setAdvertisingList( advertisingList );
+        advertisingAllOutGoingDTO.setAdvertisingList(advertisingList);
         return advertisingAllOutGoingDTO;
     }
 
     default Advertising map(AdvertisingIncomingDTO advertisingIncomingDTO) {
         Advertising advertising = new Advertising();
-        advertising.setInfoText( advertisingIncomingDTO.getInfoText());
+        advertising.setInfoText(advertisingIncomingDTO.getInfoText());
         List<SitePage> sitePageList = new ArrayList<>();
         for (SitePage sitePage : advertisingIncomingDTO.getSitePageList()) {
-            sitePageList.add( sitePage);
+            sitePageList.add(sitePage);
         }
-        advertising.setSitePageList( sitePageList );
+        advertising.setSitePageList(sitePageList);
         return advertising;
     }
 }

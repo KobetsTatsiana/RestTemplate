@@ -35,18 +35,18 @@ class SiteServletTest {
 
     @BeforeEach
     void setUp() throws SQLException {
-        mockedService = Mockito.mock( UserService.class );
-        mockedRepository = Mockito.mock( UserRepository.class );
-        mockedConnectionManager = Mockito.mock( ConnectionManager.class );
-        mockedConnection = Mockito.mock( Connection.class );
+        mockedService = Mockito.mock(UserService.class);
+        mockedRepository = Mockito.mock(UserRepository.class);
+        mockedConnectionManager = Mockito.mock(ConnectionManager.class);
+        mockedConnection = Mockito.mock(Connection.class);
 
-        when( mockedService.getRepository() ).thenReturn( mockedRepository );
-        when( mockedRepository.save( any() ) ).thenReturn( Optional.empty() );
-        when( mockedRepository.findAll() ).thenReturn( Collections.emptyList() );
-        when( mockedConnectionManager.getConnection() ).thenReturn( mockedConnection );
+        when(mockedService.getRepository()).thenReturn(mockedRepository);
+        when(mockedRepository.save(any())).thenReturn(Optional.empty());
+        when(mockedRepository.findAll()).thenReturn(Collections.emptyList());
+        when(mockedConnectionManager.getConnection()).thenReturn(mockedConnection);
 
-        servlet = new UserServlet( mockedConnectionManager );
-        servlet.setService( mockedService );
+        servlet = new UserServlet(mockedConnectionManager);
+        servlet.setService(mockedService);
     }
 
     @Test
@@ -66,14 +66,14 @@ class SiteServletTest {
 
     @Test
     void testDoGet() throws Exception {
-        HttpServletRequest request = Mockito.mock( HttpServletRequest.class );
-        HttpServletResponse response = Mockito.mock( HttpServletResponse.class );
+        HttpServletRequest request = Mockito.mock(HttpServletRequest.class);
+        HttpServletResponse response = Mockito.mock(HttpServletResponse.class);
         StringWriter stringWriter = new StringWriter();
-        Mockito.when( response.getWriter() ).thenReturn( new PrintWriter( stringWriter ) );
+        Mockito.when(response.getWriter()).thenReturn(new PrintWriter(stringWriter));
 
-        servlet.doGet( request, response );
+        servlet.doGet(request, response);
 
-        Assertions.assertFalse( stringWriter.toString().isEmpty(), "Response body should not be empty" );
-        Mockito.verify( response ).setStatus( HttpServletResponse.SC_OK );
+        Assertions.assertFalse(stringWriter.toString().isEmpty(), "Response body should not be empty");
+        Mockito.verify(response).setStatus(HttpServletResponse.SC_OK);
     }
 }

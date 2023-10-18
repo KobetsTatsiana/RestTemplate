@@ -9,7 +9,6 @@ import org.example.db.HikariCPDataSource;
 import org.example.model.UserEntity;
 import org.example.repository.UserRepository;
 import org.example.repository.impl.UserRepositoryImpl;
-
 import org.example.service.UserService;
 import org.example.service.impl.UserServiceImpl;
 
@@ -46,7 +45,7 @@ public class SiteServlet extends HttpServlet {
         try {
             List<UserEntity> userEntityList = service.findAll();
             String jsonString = mapper.writeValueAsString(userEntityList);
-            sendSuccessResponse(response, "GetAll UserEntity:" + jsonString );
+            sendSuccessResponse(response, "GetAll UserEntity:" + jsonString);
         } catch (SQLException e) {
             handleException(response, e, "Failed to fetch all userEntityList");
         } catch (Exception e) {
@@ -74,5 +73,4 @@ public class SiteServlet extends HttpServlet {
         response.setStatus(statusCode);
         response.getWriter().write(message);
     }
-
 }

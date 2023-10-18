@@ -37,8 +37,8 @@ public class PageOutGoingDTOTest {
 
     @Test
     public void testAdvertisingList() {
-        Advertising adv1 = new Advertising(); // Initialize as per your Project.
-        Advertising adv2 = new Advertising(); // Initialize as per your Project.
+        Advertising adv1 = new Advertising();
+        Advertising adv2 = new Advertising();
 
         List<Advertising> advList = Arrays.asList(adv1, adv2);
         pageOutGoingDTO.setAdvertisingList(advList);

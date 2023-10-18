@@ -1,6 +1,5 @@
 package org.example.service;
 
-
 import org.example.model.SitePage;
 import org.example.repository.Repository;
 import org.example.service.impl.SitePageServiceImpl;

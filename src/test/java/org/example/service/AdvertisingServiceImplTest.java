@@ -14,7 +14,9 @@ import java.sql.SQLException;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
+
 import org.junit.jupiter.api.Test;
+
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.when;
@@ -88,7 +90,7 @@ class AdvertisingServiceImplTest {
     }
 
     @Test
-    void testDeleteTagEntitySuccessfully() throws SQLException {
+    void testDeleteAdvertisingEntitySuccessfully() throws SQLException {
         Long id = 1L;
 
         when(repository.deleteById(id)).thenReturn(true);

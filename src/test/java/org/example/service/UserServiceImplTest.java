@@ -14,7 +14,6 @@ import java.sql.SQLException;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.doThrow;
@@ -131,7 +130,7 @@ class UserServiceImplTest {
     }
 
     @Test
-    void testDeleteAuthorEntityWithException() throws SQLException {
+    void testDeleteUserWithException() throws SQLException {
         Long id = 1L;
 
         when(repository.deleteById(id)).thenThrow(new RuntimeException("Simulated Exception"));

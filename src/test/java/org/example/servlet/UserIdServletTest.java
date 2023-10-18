@@ -64,7 +64,7 @@ class UserIdServletTest {
     }
 
     @Test
-    void testDoGet() throws Exception {
+    public void testDoGet() throws Exception {
         UserServiceImpl mockService = mock(UserServiceImpl.class);
 
         Long id = 1L;

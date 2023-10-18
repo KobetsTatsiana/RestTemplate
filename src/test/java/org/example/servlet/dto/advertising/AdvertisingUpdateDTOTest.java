@@ -17,11 +17,10 @@ public class AdvertisingUpdateDTOTest {
         advertisingUpdateDTO.setInfoText("Test info text");
 
         List<SitePage> sitePageList = new ArrayList<>();
-        SitePage page = new SitePage(); // use an appropriate constructor or set values as required
+        SitePage page = new SitePage();
         sitePageList.add(page);
         advertisingUpdateDTO.setSitePagesList(sitePageList);
 
-        // Verify the get methods
         assertEquals(123L, advertisingUpdateDTO.getId());
         assertEquals("Test info text", advertisingUpdateDTO.getInfoText());
         assertEquals(sitePageList, advertisingUpdateDTO.getSitePagesList());

@@ -11,17 +11,15 @@ import static org.junit.jupiter.api.Assertions.*;
 class AdvertisingAllOutGoingDTOTest {
 
     @Test
-    public void getAndSetAdvertisingList() {
-        // Prepare test data
+     void testGetAndSetAdvertisingList() {
+
         List<Advertising> advertisingList = new ArrayList<>();
-        Advertising advertising = new Advertising(); // Use an appropriate constructor or setters for initialization
+        Advertising advertising = new Advertising();
         advertisingList.add(advertising);
 
-        // Test the setters and getters
         AdvertisingAllOutGoingDTO advertisingAllOutGoingDTO = new AdvertisingAllOutGoingDTO();
         advertisingAllOutGoingDTO.setAdvertisingList(advertisingList);
 
-        // Verify the result
         assertEquals(advertisingList, advertisingAllOutGoingDTO.getAdvertisingList());
     }
 }

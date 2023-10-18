@@ -1,7 +1,6 @@
 package org.example.servlet.dto.user;
 
 import org.example.model.UserEntity;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;

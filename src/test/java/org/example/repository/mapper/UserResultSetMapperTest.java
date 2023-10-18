@@ -15,7 +15,7 @@ class UserResultSetMapperTest {
 
     @Test
     void testMap() throws SQLException {
-        ResultSet mockResultSet = Mockito.mock( ResultSet.class );
+        ResultSet mockResultSet = Mockito.mock(ResultSet.class);
         long expectedId = 1;
         String expectedName = "Ivan";
         String expectedSurname = "Ivanov";
@@ -25,15 +25,13 @@ class UserResultSetMapperTest {
         when(mockResultSet.getString("name")).thenReturn(expectedName);
         when(mockResultSet.getString("surname")).thenReturn(expectedSurname);
         when(mockResultSet.getString("address")).thenReturn(expectedAddress);
-        UserResultSetMapper mapper = Mappers.getMapper( UserResultSetMapper.class );
+        UserResultSetMapper mapper = Mappers.getMapper(UserResultSetMapper.class);
 
+        UserEntity userEntity = mapper.map(mockResultSet);
 
-        UserEntity userEntity = mapper.map( mockResultSet );
-
-
-        assertEquals( expectedId, userEntity.getId() );
-        assertEquals( expectedName, userEntity.getName() );
-        assertEquals( expectedSurname, userEntity.getSurname() );
-        assertEquals( expectedAddress, userEntity.getAddress() );
+        assertEquals(expectedId, userEntity.getId());
+        assertEquals(expectedName, userEntity.getName());
+        assertEquals(expectedSurname, userEntity.getSurname());
+        assertEquals(expectedAddress, userEntity.getAddress());
     }
 }

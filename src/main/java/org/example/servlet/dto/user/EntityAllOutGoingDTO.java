@@ -5,7 +5,6 @@ import org.example.model.UserEntity;
 import java.util.List;
 
 public class EntityAllOutGoingDTO {
-
     private List<UserEntity> userEntityList;
 
     public List<UserEntity> getUserEntityList() {

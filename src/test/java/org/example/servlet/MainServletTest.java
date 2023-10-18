@@ -1,10 +1,9 @@
 package org.example.servlet;
 
-
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
+
 import java.io.PrintWriter;
 import java.io.StringWriter;
 
@@ -29,7 +28,6 @@ public class MainServletTest {
         servlet.doGet(request, response);
 
         writer.flush();
-
-
-        assert(stringWriter.toString().equals("Hello"));
-    }}
+        assert (stringWriter.toString().equals("Hello"));
+    }
+}

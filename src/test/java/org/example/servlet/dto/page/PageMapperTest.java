@@ -2,10 +2,6 @@ package org.example.servlet.dto.page;
 
 import org.example.model.Advertising;
 import org.example.model.SitePage;
-import org.example.servlet.dto.page.PageAllOutGoingDTO;
-import org.example.servlet.dto.page.PageIncomingDTO;
-import org.example.servlet.dto.page.PageOutGoingDTO;
-import org.example.servlet.dto.page.PageUpdateDTO;
 import org.example.servlet.dto.page.mapper.PageMapper;
 import org.junit.jupiter.api.Test;
 
@@ -38,16 +34,14 @@ public class PageMapperTest {
 
     @Test
     public void testMapPageIncomingDTOToSitePage() {
-        //Arrange
+
         PageIncomingDTO pageIncomingDTO = new PageIncomingDTO();
         pageIncomingDTO.setNamePage("TestPage");
         Advertising advertising = new Advertising();
         pageIncomingDTO.setAdvertisingList(Arrays.asList(advertising));
 
-        //Act
         SitePage result = pageMapper.map(pageIncomingDTO);
 
-        //Assert
         assertNotNull(result);
         assertEquals("TestPage", result.getNamePage());
         assertNotNull(result.getAdvertisingList());
