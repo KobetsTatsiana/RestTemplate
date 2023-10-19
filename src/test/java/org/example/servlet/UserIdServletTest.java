@@ -13,10 +13,8 @@ import org.example.service.impl.UserServiceImpl;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.runner.RunWith;
-import org.mockito.Mock;
+
 import org.mockito.Mockito;
-import org.mockito.junit.MockitoJUnitRunner;
 
 import java.io.*;
 import java.lang.reflect.Field;
@@ -28,10 +26,9 @@ import java.util.Optional;
 
 import static org.mockito.Mockito.*;
 
-@RunWith(MockitoJUnitRunner.class)
 class UserIdServletTest {
 
-    private UserIdServlet servlet = new UserIdServlet();
+    private UserIdServlet servlet;
 
     @BeforeEach
     void setUp() throws SQLException {
@@ -67,11 +64,11 @@ class UserIdServletTest {
     public void testDoGet() throws Exception {
         UserServiceImpl mockService = mock(UserServiceImpl.class);
 
-        Long id = 1L;
+        Long testId = 1L;
         UserEntity mockEntity = new UserEntity();
-        mockEntity.setId(id);
+        mockEntity.setId(testId);
 
-        when(mockService.findById(id)).thenReturn(Optional.of(mockEntity));
+        when(mockService.findById(testId)).thenReturn(Optional.of(mockEntity));
 
         Field serviceField = UserIdServlet.class.getDeclaredField("service");
         serviceField.setAccessible(true);
@@ -82,16 +79,16 @@ class UserIdServletTest {
         StringWriter stringWriter = new StringWriter();
         PrintWriter writer = new PrintWriter(stringWriter);
         when(mockResponse.getWriter()).thenReturn(writer);
-        when(mockRequest.getPathInfo()).thenReturn("/userServlet/" + 1);
+        when(mockRequest.getPathInfo()).thenReturn("/userServlet/" + testId);
 
         servlet.doGet(mockRequest, mockResponse);
 
-        Assertions.assertTrue(stringWriter.toString().contains(id.toString()));
+        Assertions.assertTrue(stringWriter.toString().contains(testId.toString()));
     }
 
     @Test
     void testDoPut() throws Exception {
-       UserServiceImpl mockService = mock(UserServiceImpl.class);
+        UserServiceImpl mockService = mock(UserServiceImpl.class);
 
         Long testID = 1L;
         UserEntity mockEntity = new UserEntity();
@@ -194,8 +191,7 @@ class UserIdServletTest {
 
         verify(mockResponse).setContentType("application/json");
         verify(mockResponse).setCharacterEncoding("UTF-8");
-        verify(mockResponse).setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-        verify(mockWriter).write("An internal server error occurred.");
+        verify(mockResponse).setStatus(HttpServletResponse.SC_BAD_REQUEST);
+        verify(mockWriter).write("Invalid ID format");
     }
-
 }
